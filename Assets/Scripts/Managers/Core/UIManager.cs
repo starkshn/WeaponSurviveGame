@@ -139,7 +139,7 @@ public class UIManager : MonoBehaviour
             return;
         // stack을 만질때는 항상 count를 생각해주자.(안에 아무것도 없을 수도 있으니까)
         UI_Popup popup = _popupStack.Pop();
-        Managers.Resource.Destroy(popup.gameObject);
+        Managers.Resource.Destroy(popup.gameObject, 0);
         popup = null;
 
         _order--;

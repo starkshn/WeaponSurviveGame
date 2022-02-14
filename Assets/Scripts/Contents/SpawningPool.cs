@@ -11,12 +11,6 @@ public class SpawningPool : MonoBehaviour
     [SerializeField]
     int _keepArrowRegularCount = 0;
 
-
-
-
-
-
-
     [SerializeField]
     Vector3 _spawnPos; // spawn할 중심점
     [SerializeField]

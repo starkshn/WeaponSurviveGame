@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ResourceManager
 {
+
     public T Load<T>(string path) where T : Object
     {
         return Resources.Load<T>(path);
@@ -45,11 +46,13 @@ public class ResourceManager
         return go;
     }
 
-    public void Destroy(GameObject go)
+    public void Destroy(GameObject go, float destroyTime)
     {
+       
         if (go == null)
             return;
 
-        Object.Destroy(go);
+        Object.Destroy(go, destroyTime);
+
     }
 }

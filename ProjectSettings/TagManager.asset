@@ -18,13 +18,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - Rocket
-  - 
-  - 
-  - 
+  - Arrow_Regular
+  - Arrow_Piercing
+  - Arrow_Explosive
+  - Bomb
   - 
   - 
   - 

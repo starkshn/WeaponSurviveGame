@@ -14,11 +14,16 @@ public class UI_Button_Start : UI_Popup
     enum Buttons
     {
         StartButton,
+        SettingButton,
+        QuitButton,
+
     }
 
     enum Texts
     {
         StartText,
+        SettingText,
+        QuitText,
     }
 
     enum GameObjects
@@ -41,12 +46,18 @@ public class UI_Button_Start : UI_Popup
         Bind<GameObject>(typeof(GameObjects));
         //Bind<Image>(typeof(Images));
 
-        GetText((int)Texts.StartText).text = "시작하기";
+        GetText((int)Texts.StartText).text = "Start";
+        GetText((int)Texts.SettingText).text = "Settings";
+        GetText((int)Texts.QuitText).text = "Quit";
 
         GameObject _startButton = GetButton((int)Buttons.StartButton).gameObject;
-       
+        GameObject _settingButton = GetButton((int)Buttons.SettingButton).gameObject;
+        GameObject _quitButton = GetButton((int)Buttons.QuitButton).gameObject;
+
         BindEvent(_startButton, ClickedStartButton, Define.UIEvent.Click);
-        
+        BindEvent(_settingButton, ClickedSettingButton, Define.UIEvent.Click);
+        BindEvent(_quitButton, ClickedQuitButton, Define.UIEvent.Click);
+
         GameObject _startSceneUI = GetObject((int)GameObjects.StartScene_UI).gameObject;
        
         // 밑에 두줄은 Drag상태에서만 사용을 한다
@@ -69,7 +80,6 @@ public class UI_Button_Start : UI_Popup
         //    _activePausePanel = true;
         //    Time.timeScale = 0;
         //}
-
     }
 
     public void ClickedStartButton(PointerEventData data)
@@ -79,5 +89,13 @@ public class UI_Button_Start : UI_Popup
 
         SceneManager.LoadScene("GameScene");
 
+    }
+    public void ClickedSettingButton(PointerEventData data)
+    {
+       // ToDo
+    }
+    public void ClickedQuitButton(PointerEventData data)
+    {
+        // ToDo
     }
 }

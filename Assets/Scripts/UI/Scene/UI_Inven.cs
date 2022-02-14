@@ -18,7 +18,7 @@ public class UI_Inven : UI_Scene
         GameObject gridPanel = Get<GameObject>((int)GameObjects.GridPanel);
 
         foreach (Transform child in gridPanel.transform)
-            Managers.Resource.Destroy(child.gameObject); // gridPanel 돌면서 child삭제
+            Managers.Resource.Destroy(child.gameObject, 0); // gridPanel 돌면서 child삭제
 
 
         // 실제 인벤토리 정보를 참고해서 뭔가를 채워주는 부분 

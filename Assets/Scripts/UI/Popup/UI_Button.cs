@@ -66,8 +66,7 @@ public class UI_Button : UI_Popup
         GetText((int)Texts.ResumeText).text = "계속하기";
         GetText((int)Texts.RestartText).text = "재시작하기";
         Get<Text>((int)Texts.QuitText).text = "종료하기";
-        GetText((int)Texts.ScoreText).text = $"점수 : {_score}";
-
+        String _scoreText = GetText((int)Texts.ScoreText).text = $"Score : {_score}";
 
         GameObject _pauseButton = GetButton((int)Buttons.PauseButton).gameObject;
         GameObject _resumeButton = GetButton((int)Buttons.ResumeButton).gameObject;
@@ -80,6 +79,9 @@ public class UI_Button : UI_Popup
         BindEvent(_restartButton, ClickedRestartButton, Define.UIEvent.Click);
         BindEvent(_jumpButton, ClickedJumpButton, Define.UIEvent.Click);
 
+        // Score BindEvent
+        //BindEventScore(_scoreText, UpdateScore);
+        
 
         GameObject _gameSceneUI = GetObject((int)GameObjects.GameScene_UI).gameObject;
         GameObject _pausePanel = GetObject((int)GameObjects.PausePanel).gameObject;
@@ -98,8 +100,12 @@ public class UI_Button : UI_Popup
 
     public void UpdateScore()
     {
-        GetText((int)Texts.ScoreText).text = $"점수 : {_score}";
+        GetText((int)Texts.ScoreText).text = $"Score : {_score}";
+    }
 
+    private void Update()
+    {
+        UpdateScore();
     }
 
     public void UpdateGameSceneUI()

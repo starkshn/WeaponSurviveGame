@@ -15,6 +15,31 @@ public class WeaponCollision : MonoBehaviour
 
     public Action<int> OnScoreEvent;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        GameObject go = other.gameObject;
+        int _mask = go.layer;
+
+        switch(_mask)
+        {
+            case 6:
+                {
+                    ArrowRegularCollision(go);
+                }
+                break;
+            case 7:
+                {
+
+                }
+                break;
+            case 8:
+                {
+
+                }
+                break;
+        }
+    }
+
     public void OnCollisionEnter(Collision collision)
     {
        GameObject go = collision.gameObject;
@@ -23,23 +48,7 @@ public class WeaponCollision : MonoBehaviour
 
        switch (type)
        {
-            case Define.WorldObject.Arrow_Regular:
-                {
-                    Debug.Log("Rocket Collision!");
-
-                    ArrowRegularCollision(go);
-                }
-                break;
-            case Define.WorldObject.Arrow_Piercing:
-                {
-                   
-                }
-                break;
-            case Define.WorldObject.Arrow_Explosive:
-                {
-                   
-                }
-                break;
+            
             case Define.WorldObject.Bomb:
                 {
                     

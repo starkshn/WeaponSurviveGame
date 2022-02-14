@@ -91,10 +91,10 @@ public class GameManagerEx
                         if (OnSpawnEvent != null)
                         {
                             OnSpawnEvent.Invoke(-1);
-                            OnScoreEvent.Invoke(1);
-
+                            OnScoreEvent.Invoke(100);
                         }
                     }
+                    Managers.Resource.Destroy(go, 1.0f);
                 }
                 break;
             case Define.WorldObject.Arrow_Piercing:
@@ -108,7 +108,7 @@ public class GameManagerEx
                             OnScoreEvent.Invoke(10);
                         }
                     }
-                    
+                    Managers.Resource.Destroy(go, 0.5f);
                 }
                 break;
             case Define.WorldObject.Arrow_Explosive:
@@ -122,6 +122,7 @@ public class GameManagerEx
                             OnScoreEvent.Invoke(20);
                         }
                     }
+                    Managers.Resource.Destroy(go, 0);
                 }
                 break;
             case Define.WorldObject.Bomb:
@@ -135,11 +136,11 @@ public class GameManagerEx
                             OnScoreEvent.Invoke(30);
                         }
                     }
+                    Managers.Resource.Destroy(go, 2.0f);
                 }
                 break;
         }
 
-        Managers.Resource.Destroy(go);
     }
 
     public void DespawnTime(GameObject go)

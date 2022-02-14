@@ -41,6 +41,7 @@ public class ArrowRegularController : WeaponBaseController
 
         // Rocket Dir¼³Á¤
         transform.position = Vector3.MoveTowards(gameObject.transform.position, _destDir, Time.deltaTime * _speed);
+        transform.LookAt(_destDir);
 
     }
 }

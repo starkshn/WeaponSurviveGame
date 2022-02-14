@@ -17,6 +17,10 @@ public class PlayerController : BaseController
 
     GameObject _jumpButton;
 
+    // collision 구별하기위한 Layer
+    int _mask = ( 1 << (int)Define.Layer.Arrow_Regular | 1 << (int)Define.Layer.Arrow_Piercing | 1 << (int)Define.Layer.Arrow_Explosive | 1 << (int)Define.Layer.Bomb );
+
+    public Action<Collider> OnTriggerEvent = null;
 
     public override void init()
     {
@@ -29,6 +33,9 @@ public class PlayerController : BaseController
         _speed = 5.0f;
         _jumpSpeedF = 4.0f;
         _gravity = 20.0f;
+
+        OnTriggerEvent -= OnCollisionPlayer;
+        OnTriggerEvent += OnCollisionPlayer;
 
     }
 
@@ -114,7 +121,6 @@ public class PlayerController : BaseController
     }
     protected override void UpdateJump()
     {
-
         if (State == Define.State.Die)
             return;
 
@@ -134,43 +140,82 @@ public class PlayerController : BaseController
                 return;
             }
         }
-        
+    }
+
+    protected override void UpdateCollision()
+    {
+        if (State == Define.State.Die)
+            return;
+
+        if (_isJump)
+        {
+            State = Define.State.Jump;
+            return;
+        }
+
+        if (_joyStickManager._isInput == false)
+        {
+            State = Define.State.Idle;
+            return;
+        }
+        else
+        {
+            State = Define.State.Move;
+            return;
+        }
     }
 
     protected override void UpdateDie()
     {
 
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         CollisionEvent(collision);
     }
     
+
     public void CollisionEvent(Collision collision)
     {
-        switch(collision.gameObject.tag)
+        if (collision.gameObject.tag == "Ground")
         {
-            case "Rock":
-                {
-                    RD.AddForce(new Vector3(0, 30, 30) * _jumpSpeedF);
-                }
-                break;
-            case "Ground":
-                {
-                    _isJump = false;
-                }
-                break;
-            case "Tree":
-                break;
+            _isJump = false;
         }
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if(other.gameObject.tag=="food")
-    //    {
-    //        ComputeHP(5);
-    //    }
-    //}    
+    // CollisonEvent를 지금 WorldType으로 받아와서 구분해도 되지만 공부차원에서 Layer를 쓰도록 하겠습니다.
+    private void OnTriggerEnter(Collider other)
+    {
+        GameObject go = other.gameObject;
+        int _mask = go.layer;
+
+        switch(_mask)
+        {
+            case 6:
+                {
+                    Debug.Log("OnAttack!!");
+                    if (OnTriggerEvent != null)
+                        OnTriggerEvent.Invoke(other);
+                }
+                break;
+            case 7:
+                {
+
+                }
+                break;
+            case 8:
+                {
+
+                }
+                break;
+        }
+    }
+    private void OnCollisionPlayer(Collider other)
+    {
+        Debug.Log("Action! Event");
+        if (other != null)
+            State = Define.State.Collision;
+        else
+            return;
+    }
 }
