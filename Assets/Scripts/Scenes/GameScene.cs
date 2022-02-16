@@ -25,7 +25,7 @@ public class GameScene : BaseScene
         GameObject ReSpawnZone = GameObject.FindGameObjectWithTag("ReSpawnZone");
         SpawningPool pool = ReSpawnZone.AddComponent<SpawningPool>();
 
-        pool.SetKeepRocketCount(70);
+        pool.SetKeepRocketCount(10);
 
     }
 

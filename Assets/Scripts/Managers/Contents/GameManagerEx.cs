@@ -91,7 +91,7 @@ public class GameManagerEx
                         if (OnSpawnEvent != null)
                         {
                             OnSpawnEvent.Invoke(-1);
-                            OnScoreEvent.Invoke(100);
+                            OnScoreEvent.Invoke(10);
                         }
                     }
                     Managers.Resource.Destroy(go, 1.0f);

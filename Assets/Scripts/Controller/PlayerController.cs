@@ -174,7 +174,6 @@ public class PlayerController : BaseController
         CollisionEvent(collision);
     }
     
-
     public void CollisionEvent(Collision collision)
     {
         if (collision.gameObject.tag == "Ground")
@@ -194,6 +193,7 @@ public class PlayerController : BaseController
             case 6:
                 {
                     Debug.Log("OnAttack!!");
+                    other.transform.SetParent(this.transform);
                     if (OnTriggerEvent != null)
                         OnTriggerEvent.Invoke(other);
                 }
@@ -214,8 +214,10 @@ public class PlayerController : BaseController
     {
         Debug.Log("Action! Event");
         if (other != null)
+        {
             State = Define.State.Collision;
-        else
             return;
+        }
+
     }
 }

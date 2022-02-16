@@ -5,6 +5,8 @@ using UnityEngine;
 public class ArrowRegularController : WeaponBaseController
 {
     private float _speed = 60.0f;
+
+
     public override void init()
     {
         WorldObjectType = Define.WorldObject.Arrow_Regular;

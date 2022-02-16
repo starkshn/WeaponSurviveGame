@@ -894,6 +894,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button Green Outline
       objectReference: {fileID: 0}
+    - target: {fileID: 1968373806953840001, guid: 676614c30efe6fc4b82edb9eddfa3ad6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1968373806953840003, guid: 676614c30efe6fc4b82edb9eddfa3ad6, type: 3}
       propertyPath: m_Type
       value: 1
@@ -924,7 +928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1968373807185072955, guid: 676614c30efe6fc4b82edb9eddfa3ad6, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 300
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 1968373807185072955, guid: 676614c30efe6fc4b82edb9eddfa3ad6, type: 3}
       propertyPath: m_SizeDelta.y
