@@ -20,8 +20,6 @@ public class PlayerController : BaseController
     // collision 구별하기위한 Layer
     int _mask = ( 1 << (int)Define.Layer.Arrow_Regular | 1 << (int)Define.Layer.Arrow_Piercing | 1 << (int)Define.Layer.Arrow_Explosive | 1 << (int)Define.Layer.Bomb );
 
-    public Action<Collider> OnTriggerEvent = null;
-
     public override void init()
     {
         RD = GetComponent<Rigidbody>();
@@ -33,9 +31,6 @@ public class PlayerController : BaseController
         _speed = 5.0f;
         _jumpSpeedF = 4.0f;
         _gravity = 20.0f;
-
-        OnTriggerEvent -= OnCollisionPlayer;
-        OnTriggerEvent += OnCollisionPlayer;
 
     }
 
@@ -158,7 +153,8 @@ public class PlayerController : BaseController
             State = Define.State.Idle;
             return;
         }
-        else
+
+        if (_joyStickManager._isInput == true)
         {
             State = Define.State.Move;
             return;
@@ -187,15 +183,16 @@ public class PlayerController : BaseController
     {
         GameObject go = other.gameObject;
         int _mask = go.layer;
+        CapsuleCollider capCollider = go.GetComponent<CapsuleCollider>();
 
-        switch(_mask)
+        switch (_mask)
         {
             case 6:
                 {
-                    Debug.Log("OnAttack!!");
-                    other.transform.SetParent(this.transform);
-                    if (OnTriggerEvent != null)
-                        OnTriggerEvent.Invoke(other);
+                    //capCollider.enabled = false;
+                    Debug.Log("RegularArrow Attack Player!!");
+                    //go.transform.SetParent(this.transform);
+                    State = Define.State.Collision;
                 }
                 break;
             case 7:
@@ -210,14 +207,11 @@ public class PlayerController : BaseController
                 break;
         }
     }
-    private void OnCollisionPlayer(Collider other)
+    
+    public void SetColliderAnimation()
     {
-        Debug.Log("Action! Event");
-        if (other != null)
-        {
-            State = Define.State.Collision;
-            return;
-        }
 
     }
+    
+    
 }

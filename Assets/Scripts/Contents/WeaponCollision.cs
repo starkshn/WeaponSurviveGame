@@ -7,6 +7,7 @@ using UnityEngine;
 public class WeaponCollision : MonoBehaviour
 {
     public ParticleSystem _effect;
+    PlayerController OnArrowPlayer = new PlayerController();
     void Start()
     {
         _effect = Managers.Resource.InstantiateParticle("RocketEffect/Effects_M/Explosions/NormalRocketExplosion");
@@ -19,6 +20,7 @@ public class WeaponCollision : MonoBehaviour
     {
         GameObject go = other.gameObject;
         int _mask = go.layer;
+        Console.WriteLine("OnTrigger enter RegularArrow!");
 
         switch(_mask)
         {
@@ -45,7 +47,7 @@ public class WeaponCollision : MonoBehaviour
        GameObject go = collision.gameObject;
        Define.WorldObject type = Managers.Game.GetWorldObjectType(go);
        Debug.Log(type);
-
+        
        switch (type)
        {
             
@@ -60,8 +62,9 @@ public class WeaponCollision : MonoBehaviour
 
    public void ArrowRegularCollision(GameObject go)
     {
+        
         Managers.Game.Despawn(go);
-        //_effect.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z);
+        //_effect.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z); // -> ÆøÅº È¿°ú
         //_effect.Play();
         
     }
