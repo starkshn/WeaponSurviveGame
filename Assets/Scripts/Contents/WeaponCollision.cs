@@ -11,7 +11,6 @@ public class WeaponCollision : MonoBehaviour
     void Start()
     {
         _effect = Managers.Resource.InstantiateParticle("RocketEffect/Effects_M/Explosions/NormalRocketExplosion");
-       
     }
 
     public Action<int> OnScoreEvent;
@@ -50,10 +49,9 @@ public class WeaponCollision : MonoBehaviour
         
        switch (type)
        {
-            
             case Define.WorldObject.Bomb:
                 {
-                    
+                    Console.WriteLine("Bomb!");
                 }
                 break;
         }
@@ -62,11 +60,10 @@ public class WeaponCollision : MonoBehaviour
 
    public void ArrowRegularCollision(GameObject go)
     {
-        
+        Console.WriteLine("123!");
         Managers.Game.Despawn(go);
         //_effect.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z); // -> ÆøÅº È¿°ú
         //_effect.Play();
-        
     }
 
     public void BigRocketCollision(GameObject go)
