@@ -4,50 +4,52 @@ using UnityEngine;
 
 public class SpawningPool : MonoBehaviour
 {
-    int _reserveCount = 0;
+    [SerializeField]
+    GameObject _respawnObject;
+    [SerializeField]
+    public int _objectCount = 0;
+    [SerializeField]
+    public int _keepObjectCount = 0;
 
     [SerializeField]
-    public int _arrowRegularCount = 0;
+    public Vector3 _spawnPos;
     [SerializeField]
-    int _keepArrowRegularCount = 0;
-
+    public float _spawnRadius = 15.0f;
     [SerializeField]
-    Vector3 _spawnPos; // spawn할 중심점
-    [SerializeField]
-    float _spawnRadius = 15.0f; // _spawnPos 중심으로 어느정도 거리에서 랜덤으로 spawn 해 줄 값.
-    [SerializeField]
-    float _spawnTime = 5.0f;
+    public float _spawnTime = 5.0f;
 
     GameObject _spawnZone;
 
-    // Rock
-   
-    // Rocket
-    public void AddRocketCount(int value) { _arrowRegularCount += value; }
-    public void SetKeepRocketCount(int count) { _keepArrowRegularCount = count; }
+    int _reserveCount = 0;
+
+    public void AddObjectCount(int value) { _objectCount += value; }
+    public void SetKeepObjectCount(int count) { _keepObjectCount = count; }
 
     void Start()
     {
-        Managers.Game.OnSpawnEvent -= AddRocketCount;
-        Managers.Game.OnSpawnEvent += AddRocketCount;
+        Managers.Game.OnSpawnEvent -= AddObjectCount;
+        Managers.Game.OnSpawnEvent += AddObjectCount;
     }
-
 
     void Update()
     {
-        while (_reserveCount + _arrowRegularCount < _keepArrowRegularCount)
+        while (_reserveCount + _objectCount < _keepObjectCount)
         {
-            StartCoroutine("ReserveArrowRegularSpawn");
+            Debug.Log("코루틴 실행!");
+            StartCoroutine(ReserveObjectSpawn(_respawnObject));
         }
     }
 
-    IEnumerator ReserveArrowRegularSpawn()
+    public IEnumerator ReserveObjectSpawn(GameObject go)
     {
         _reserveCount++;
-
+        
         yield return new WaitForSeconds(Random.Range(0, _spawnTime));
+        Debug.Log("코루틴 실행 in 코루틴!");
 
-        GameObject obj = Managers.Game.Spawn(Define.WorldObject.Arrow_Regular, "Weapons/Arrow_Regular");
+        GameObject obj = Managers.Game.Spawn(Managers.Game.GetWorldObjectType(_respawnObject), $"RespawnObject/{go.name}");
+        if (obj != null)
+            Debug.Log($"Spawn {obj.name}");
 
         Vector3 randPos;
 

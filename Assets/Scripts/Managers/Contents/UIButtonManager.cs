@@ -12,7 +12,6 @@ public class UIButtonManager : MonoBehaviour
 
     public Action<Define.UIButton> UIAction = null;
 
-
     private void Start()
     {
         _player = GameObject.FindObjectOfType<PlayerController>();

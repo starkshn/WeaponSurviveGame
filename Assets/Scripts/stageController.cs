@@ -22,7 +22,6 @@ public class stageController : MonoBehaviour
                     break;
 
             }
-            
         }
             
     }

@@ -66,6 +66,7 @@ public class Define
         Arrow_Explosive,
         Arrow_Piercing,
         Bomb,
+        WaterBottle,
     }
     // WorldObject로 collison충돌하는데 사용해도되지만 공부차원에서 Layer를 쓰도록 하겠습니다.
     public enum Layer
@@ -76,7 +77,7 @@ public class Define
         Arrow_Explosive = 7,
         Arrow_Piercing = 8,
         Bomb = 9,
-
+        WaterBottle = 10,
     }
 
 }

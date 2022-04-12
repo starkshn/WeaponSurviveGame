@@ -9,12 +9,12 @@ public class GameScene : BaseScene
     {
         base.init();
 
+        Debug.Log("GameScene!");
+
         SceneType = Define.Scene.Game;
 
         GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "DuoPlayer/P02");
-        //GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "DogKnight/DogPolyart");
-
-
+        
         Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player);
 
         Managers.Resource.Instantiate("UI/GameScene_UI");
@@ -23,9 +23,12 @@ public class GameScene : BaseScene
 
         // Respawn
         GameObject ReSpawnZone = GameObject.FindGameObjectWithTag("ReSpawnZone");
-        SpawningPool pool = ReSpawnZone.AddComponent<SpawningPool>();
+        SpawningPool pool = new SpawningPool();
 
-        pool.SetKeepRocketCount(10);
+        if (ReSpawnZone.GetComponent<SpawningPool>() != null)
+            pool = ReSpawnZone.AddComponent<SpawningPool>();
+        
+        pool.SetKeepObjectCount(10);
 
     }
 

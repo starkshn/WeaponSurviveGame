@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneManagerEx
-{
-
+{ 
     public BaseScene CurrenScene { get { return GameObject.FindObjectOfType<BaseScene>(); } } // property로 만든것.
     // 이런식으로 BaseScene Component를 들고 있는 애를 찾아주세요이다.
 

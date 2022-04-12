@@ -82,7 +82,6 @@ public class UI_Button : UI_Popup
         // Score BindEvent
         //BindEventScore(_scoreText, UpdateScore);
         
-
         GameObject _gameSceneUI = GetObject((int)GameObjects.GameScene_UI).gameObject;
         GameObject _pausePanel = GetObject((int)GameObjects.PausePanel).gameObject;
 

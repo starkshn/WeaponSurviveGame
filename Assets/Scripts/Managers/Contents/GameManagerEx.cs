@@ -11,26 +11,27 @@ public class GameManagerEx
     HashSet<GameObject> _arrowPiercing = new HashSet<GameObject>();
     HashSet<GameObject> _arrowExplosive = new HashSet<GameObject>();
     HashSet<GameObject> _bomb = new HashSet<GameObject>();
-
+    HashSet<GameObject> _water = new HashSet<GameObject>();
 
     //HashSet<GameObject> _tres = new HashSet<GameObject>();
 
     public Action<int> OnSpawnEvent;
     public Action<int> OnScoreEvent;
 
-
     public GameObject GetPlayer() { return _player; }
 
-    public Define.WorldObject GetWorldObjectType(GameObject go)
+    public Define.WorldObject GetWorldObjectType(GameObject go) 
     {
+        RespawnObject roc = go.GetComponent<RespawnObject>();
 
-        WeaponBaseController wbc = go.GetComponent<WeaponBaseController>();
-
-        if (wbc == null)
+        if (roc == null)
+        {
+            Debug.Log("GetWorldObjectType Failed!");
             return Define.WorldObject.Unknown;
-
+        }
+            
         // bc is PlayerController; 이렇게 체크를 할 수는 있기는 하다.
-        return wbc.WorldObjectType;
+        return roc.WorldObjectType;
     }
 
     public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
@@ -72,7 +73,17 @@ public class GameManagerEx
                         OnSpawnEvent.Invoke(1);
                 }
                 break;
-
+            case Define.WorldObject.WaterBottle:
+                {
+                    _water.Add(go);
+                    if (OnSpawnEvent != null)
+                    {
+                        OnSpawnEvent.Invoke(1);
+                        Debug.Log("Spawn WaterBottle!");
+                    }
+                }
+                break;
+            
         }
         return go;
     }
@@ -139,13 +150,24 @@ public class GameManagerEx
                     Managers.Resource.Destroy(go, 2.0f);
                 }
                 break;
+            case Define.WorldObject.WaterBottle:
+                {
+                    if (_water.Contains(go))
+                    {
+                        _water.Remove(go);
+                        if (OnSpawnEvent != null)
+                        {
+                            OnSpawnEvent.Invoke(-1);
+                        }
+                    }
+                    Managers.Resource.Destroy(go, 0);
+                }
+                break;
+            default:
+                break;
         }
 
     }
 
-    public void DespawnTime(GameObject go)
-    {
-        // 오브젝트가 땅에 떨어지고 일정시간이 지나면 Despawn함수 호출
-    }
 }
 

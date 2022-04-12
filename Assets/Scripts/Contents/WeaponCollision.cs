@@ -38,6 +38,16 @@ public class WeaponCollision : MonoBehaviour
 
                 }
                 break;
+            case 9:
+                {
+
+                }
+                break;
+            case 10:
+                {
+
+                }
+                break;
         }
     }
 
@@ -60,8 +70,8 @@ public class WeaponCollision : MonoBehaviour
 
    public void ArrowRegularCollision(GameObject go)
     {
-        Console.WriteLine("123!");
         Managers.Game.Despawn(go);
+        
         //_effect.transform.position = new Vector3(go.transform.position.x, 0, go.transform.position.z); // -> ÆøÅº È¿°ú
         //_effect.Play();
     }

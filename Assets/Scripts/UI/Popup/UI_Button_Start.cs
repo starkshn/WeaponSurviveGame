@@ -16,7 +16,7 @@ public class UI_Button_Start : UI_Popup
         StartButton,
         SettingButton,
         QuitButton,
-
+        
     }
 
     enum Texts
@@ -44,6 +44,7 @@ public class UI_Button_Start : UI_Popup
         Bind<Button>(typeof(Buttons));
         Bind<Text>(typeof(Texts));
         Bind<GameObject>(typeof(GameObjects));
+        
         //Bind<Image>(typeof(Images));
 
         GetText((int)Texts.StartText).text = "Start";
@@ -53,11 +54,12 @@ public class UI_Button_Start : UI_Popup
         GameObject _startButton = GetButton((int)Buttons.StartButton).gameObject;
         GameObject _settingButton = GetButton((int)Buttons.SettingButton).gameObject;
         GameObject _quitButton = GetButton((int)Buttons.QuitButton).gameObject;
+        GameObject asd = GetButton((int)Buttons.QuitButton).gameObject;
 
         BindEvent(_startButton, ClickedStartButton, Define.UIEvent.Click);
         BindEvent(_settingButton, ClickedSettingButton, Define.UIEvent.Click);
         BindEvent(_quitButton, ClickedQuitButton, Define.UIEvent.Click);
-
+        
         GameObject _startSceneUI = GetObject((int)GameObjects.StartScene_UI).gameObject;
        
         // 밑에 두줄은 Drag상태에서만 사용을 한다
